@@ -2,3 +2,4 @@ bin/cookie.txt
 torrents/*
 .htpasswd
 .htaccess
+bin/.config

@@ -16,6 +16,7 @@ app.run(function ($rootScope, $transitions, $state, $stateParams, $timeout, $htt
 	$rootScope.data = {};
 	$rootScope.cim = '';
 	$rootScope.toltes = false;
+	$rootScope.ertesites = {};
 
 	$rootScope.keresFn = (obj) => {
 		$rootScope.toltes = true;
@@ -34,6 +35,7 @@ app.run(function ($rootScope, $transitions, $state, $stateParams, $timeout, $htt
 		);
 	};
 	$rootScope.letoltFn = (obj) => {
+		$rootScope.ertesites = obj;
 		return $http.post('bin/letolt.php', obj).then((res) => {
 			console.log('letoltFn', res.data, obj);
 		});

@@ -85,6 +85,27 @@
 			</table>
 		</div>
 
+		<!-- ertesito letoltesrol -->
+		<div class="bg-layer" ng-show="!ertesites.isEmpty()">
+			<div class="ertesites-container">
+				<div class="fejlec">
+					Film letöltése megkezdődött!
+				</div>
+				<div class="tartalom">
+					<img ng-src="{{ ertesites.img }}" ng-if="true" />
+					<div class="cim">
+						<span>{{ ertesites.name }}</span>
+						<span>Méret: {{ ertesites.size }}</span>
+						<span>{{ ertesites.imdb }}</span>
+						<span>S/L: {{ ertesites.seeders + "/" + ertesites.leechers }}</span>
+					</div>
+				</div>
+				<div class="footer">
+					<button class="btn btn-sm btn-dark" ng-click="ertesites={}">Rendben</button>
+				</div>
+			</div>
+		</div>
+
 		<script src="./bin/js/core.js"></script>
 	</body>
 </html>
