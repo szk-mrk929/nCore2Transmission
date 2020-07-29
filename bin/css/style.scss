@@ -8,6 +8,7 @@ html {
 		background-color: transparent;
 
 		#keret {
+			position: relative;
 			background-color: rgba(black, 0.6);
 			padding: 1rem;
 			color: white;
@@ -112,6 +113,7 @@ html {
 				min-height: 150px;
 				margin: 0.25rem;
 				overflow: hidden;
+				color: black;
 				& > div {
 					padding: 0.5rem;
 				}

@@ -19,13 +19,13 @@ if($data){
 	$file_name = "$path/$data->id";  
 		
 	if(file_put_contents($file_name, file_get_contents($url)) && $config) { 
-			$rpc = new TransmissionRPC($config->host, $config->user, $config->pw);
-			$result = $rpc->add( $file_name, $config->download_dir, array('paused' => true) );
-			if($result->result == "success"){
+			// $rpc = new TransmissionRPC($config->host, $config->user, $config->pw);
+			// $result = $rpc->add( $file_name, $config->download_dir, array('paused' => true) );
+			// if($result->result == "success"){
 				print "true";
-			}else{
-				print "false";
-			}
+			// }else{
+			// 	print "false";
+			// }
 	} 
 	else { 
 			print "false";
