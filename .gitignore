@@ -1,5 +1,5 @@
 bin/cookie.txt
+bin/.config
 torrents/*
 .htpasswd
 .htaccess
-bin/.config

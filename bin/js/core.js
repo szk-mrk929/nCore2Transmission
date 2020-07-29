@@ -1,18 +1,8 @@
 'use strict';
-var app = angular.module('appCore', ['ngCookies', 'ngAnimate', 'ui.router']); //,'ngFileUpload' 'ngRoute'
-// var states = [];
+var app = angular.module('appCore', ['ngCookies', 'ngAnimate']); //,'ngFileUpload' 'ngRoute', 'ui.router'
 
-app.run(function ($rootScope, $transitions, $state, $stateParams, $timeout, $http) {
-	//UserService
-	// $rootScope.$state = $state;
-	// $rootScope.$stateParams = $stateParams;
-
-	// $rootScope.bootinprogress = 'nonbooted';
-
-	// //START
-	// $rootScope.baseTitle = 'Salt & Pepper';
-	// $rootScope.usrsvc = UserService;
-
+app.run(function ($rootScope, $http) {
+	// declares
 	$rootScope.data = {};
 	$rootScope.cim = '';
 	$rootScope.toltes = false;
@@ -23,9 +13,9 @@ app.run(function ($rootScope, $transitions, $state, $stateParams, $timeout, $htt
 		!obj ? (obj = '*') : obj;
 		return $http.post('bin/ncore.php', obj).then(
 			(res) => {
-				console.log('eredmeny', res.data);
 				$rootScope.data = res.data;
 				$rootScope.toltes = false;
+				console.log('keresFn', res.data);
 				return true;
 			},
 			() => {
@@ -35,54 +25,30 @@ app.run(function ($rootScope, $transitions, $state, $stateParams, $timeout, $htt
 		);
 	};
 	$rootScope.letoltFn = (obj) => {
-		$rootScope.ertesites = obj;
 		return $http.post('bin/letolt.php', obj).then((res) => {
-			console.log('letoltFn', res.data, obj);
+			console.log('letoltFn', res.data, obj, this);
+			if (res.data == 'true') {
+				$rootScope.ertesites = obj;
+			} else {
+				alert('Sajnos nem sikerült, szólj Dávidkának!');
+			}
 		});
 	};
 
+	// init
 	$rootScope.keresFn('*');
-
-	// $rootScope.data.mobilemenu = true;
-	// $rootScope.userData = {};
-
-	// $timeout(function () {
-	// 	$rootScope.bootinprogress = 'booted';
-	// });
 });
 
-// states.push({
-// 	name: 'main',
-// 	url: '/',
-// 	templateUrl: 'bin/template/main.php',
-// 	title: 'Főoldal',
-// 	// controller: 'MainCtrl',
-// 	col: 'col-auto col-sm-11 col-md-11 col-lg-11 col-xl-11'
-// });
-
-app.config(function (
-	$locationProvider,
-	$httpProvider,
-	$compileProvider,
-	$cookiesProvider,
-	$stateProvider,
-	$urlRouterProvider
-) {
-	//console.log("module",$routeProvider,$locationProvider);
-	// $urlRouterProvider.otherwise('/');
-
-	// //detect last states
-	// states.forEach(function (state) {
-	// 	$stateProvider.state(state);
-	// });
-
+app.config(function ($locationProvider, $httpProvider, $compileProvider, $cookiesProvider) {
 	$locationProvider.hashPrefix('');
 	$locationProvider.html5Mode(true);
 	$httpProvider.defaults.timeout = 10000;
-	$httpProvider.defaults.headers.common.lang = 'hu';
+	// $httpProvider.defaults.headers.common.lang = 'hu';
 
-	// $compileProvider.debugInfoEnabled(false);
-	// angular.reloadWithDebugInfo = function(){ window.location.reload(); }
+	$compileProvider.debugInfoEnabled(false);
+	angular.reloadWithDebugInfo = function () {
+		window.location.reload();
+	};
 });
 
 Object.prototype.isEmpty = function () {
