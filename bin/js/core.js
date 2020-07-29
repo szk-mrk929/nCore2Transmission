@@ -41,7 +41,7 @@ app.run(function ($rootScope, $transitions, $state, $stateParams, $timeout, $htt
 		});
 	};
 
-	$rootScope.keresFn('*');
+	// $rootScope.keresFn('*');
 
 	// $rootScope.data.mobilemenu = true;
 	// $rootScope.userData = {};
