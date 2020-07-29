@@ -1,8 +1,8 @@
 <?php
-// // error_reporting
-// error_reporting(E_ERROR);//E_ALL
-// ini_set('display_errors', TRUE);
-// ini_set('display_startup_errors', TRUE);
+// error_reporting
+error_reporting(E_ERROR);//E_ALL
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
 
 include_once("http.php");
 // include_once("ncore.php");
@@ -24,11 +24,11 @@ if($data){
 			if($result->result == "success"){
 				print "true";
 			}else{
-				print "false";
+				print "transmission false";
 			}
 	} 
 	else { 
-			print "false";
+			print "file false";
 	} 
 
 }
