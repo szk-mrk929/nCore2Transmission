@@ -1,0 +1,4 @@
+bin/cookie.txt
+torrents/*
+.htpasswd
+.htaccess
