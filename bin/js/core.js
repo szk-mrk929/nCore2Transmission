@@ -11,12 +11,19 @@ app.run(function ($rootScope, $http) {
 	$rootScope.keresFn = (obj) => {
 		$rootScope.toltes = true;
 		!obj ? (obj = '*') : obj;
-		return $http.post('bin/ncore.php', obj).then(
+		return $http.post('bin/php/ncore.php', obj).then(
 			(res) => {
-				$rootScope.data = res.data;
-				$rootScope.toltes = false;
 				console.log('keresFn', res.data);
-				return true;
+				$rootScope.toltes = false;
+
+				if (res.data && res.data == 'null') {
+					$rootScope.data = {};
+					alert('Nem találtam semmit :(');
+					return false;
+				} else {
+					$rootScope.data = res.data;
+					return true;
+				}
 			},
 			() => {
 				$rootScope.toltes = false;
@@ -25,8 +32,8 @@ app.run(function ($rootScope, $http) {
 		);
 	};
 	$rootScope.letoltFn = (obj) => {
-		return $http.post('bin/letolt.php', obj).then((res) => {
-			console.log('letoltFn', res.data, obj, this);
+		return $http.post('bin/php/letolt.php', obj).then((res) => {
+			console.log('letoltFn', res.data, obj);
 			if (res.data == 'true') {
 				$rootScope.ertesites = obj;
 			} else {
@@ -45,10 +52,10 @@ app.config(function ($locationProvider, $httpProvider, $compileProvider, $cookie
 	$httpProvider.defaults.timeout = 10000;
 	// $httpProvider.defaults.headers.common.lang = 'hu';
 
-	$compileProvider.debugInfoEnabled(false);
-	angular.reloadWithDebugInfo = function () {
-		window.location.reload();
-	};
+	// $compileProvider.debugInfoEnabled(false);
+	// angular.reloadWithDebugInfo = function () {
+	// 	window.location.reload();
+	// };
 });
 
 Object.prototype.isEmpty = function () {

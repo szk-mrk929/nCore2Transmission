@@ -35,11 +35,42 @@ function nCore_torrents($dat){
   }
   return $res;
 }
+function nCore_login($user, $pw){
+  post_data("https://ncore.cc/login.php","set_lang=hu&submitted=1&nev=Mark909&pass=Makko1994ncore");
+}
+function nCore_getList($search){
+  $html = get_data("https://ncore.cc/torrents.php?miszerint=seeders&hogyan=DESC&tipus=kivalasztottak_kozott&kivalasztott_tipus=xvid_hun,xvidser_hun&miben=name&mire=$search");
+  $doc = new DOMDocument();
+  $doc->validateOnParse = true;
+  $doc->loadHTML($html);
+  $output = getElementsByClassName($doc, 'box_torrent');
+  $output = element_to_obj($output);
+  $output = nCore_torrents($output);
+  return $output;
+}
 
 // error_reporting
-error_reporting(E_ERROR);//E_ALL
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
+// error_reporting(E_ERROR);//E_ALL
+// ini_set('display_errors', TRUE);
+// ini_set('display_startup_errors', TRUE);
+
+
+// $data = json_decode(file_get_contents("php://input"));
+$data = file_get_contents("php://input");
+if($data){
+  $data = htmlspecialchars($data);
+  // print_r( $data );
+  
+  //get config file
+  $config = json_decode(file_get_contents("../.config"));	
+  
+  nCore_login($config->ncore->user, $config->ncore->pw);
+  $output = nCore_getList($data);
+	
+	echo json_encode($output);
+	// print_r($output);
+}
+
 
 
 // $html = get_dataa("https://ncore.cc/hitnrun.php?showall=true&order_by=start&o=desc");
@@ -50,27 +81,5 @@ ini_set('display_startup_errors', TRUE);
 // $output = element_to_obj($output);
 // $output = nCore_HitNRun($output);
 // echo json_encode($output);
-
-
-// $data = json_decode(file_get_contents("php://input"));
-$data = file_get_contents("php://input");
-
-if($data){
-	$data = htmlspecialchars($data);
-	// print_r( $data );
-	
-	post_data("https://ncore.cc/login.php","set_lang=hu&submitted=1&nev=Mark909&pass=Makko1994ncore");
-	$html = get_data("https://ncore.cc/torrents.php?miszerint=seeders&hogyan=DESC&tipus=kivalasztottak_kozott&kivalasztott_tipus=xvid_hun,xvidser_hun&miben=name&mire=$data");
-	$doc = new DOMDocument();
-	$doc->validateOnParse = true;
-	$doc->loadHTML($html);
-	$output = getElementsByClassName($doc, 'box_torrent');
-	$output = element_to_obj($output);
-	$output = nCore_torrents($output);
-	echo json_encode($output);
-	// print_r($output);
-}
-
-
 
 ?>
