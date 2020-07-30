@@ -1,13 +1,10 @@
 # nCore2Transmission
 future tasks: <br>
-[ ] response back if download was succesful
-[ ] ignore button what is already downloaded
-[ ] hitnrun status
-[ ] show torrent statuses also on search list
-
+- [ ] response back if download was succesful
+- [ ] ignore button what is already downloaded
+- [ ] hitnrun status
+- [ ] show torrent statuses also on search list
 <br>
-
-
 bin/.config file example: <br>
 ```
 {
