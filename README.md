@@ -6,6 +6,7 @@ future tasks: <br>
 - [ ] show torrent statuses also on search list
 <br>
 bin/.config file example: <br>
+
 ```
 {
 	"ncore": {
