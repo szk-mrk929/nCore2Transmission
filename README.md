@@ -9,7 +9,8 @@ future tasks:
 - [ ] delete possibility depend on hitnrun status
 
 
-bin/.config file example(this is only you need to this project): 
+bin/.config file example (this is only you need to do for this project): 
+* pauseOnAdd = add torrent as paused or download (true or false)
 
 ```
 {
@@ -23,7 +24,8 @@ bin/.config file example(this is only you need to this project):
 		"user": "admin",
 		"pw": "wordpass",
 		"download_dir": "/mnt/usb/download",
-		"pauseOnAdd": true  // add torrent as paused or download
+		"pauseOnAdd": true 
 	}
 }
 ```
+
