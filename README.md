@@ -1,5 +1,5 @@
 # nCore2Transmission
-future tasks: <br>
+future tasks:
 - [ ] response back if download was succesful
 - [ ] ignore button what is already downloaded
 - [ ] hitnrun status
