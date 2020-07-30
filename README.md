@@ -4,8 +4,9 @@ future tasks: <br>
 - [ ] ignore button what is already downloaded
 - [ ] hitnrun status
 - [ ] show torrent statuses also on search list
-<br>
-bin/.config file example: <br>
+
+
+bin/.config file example: 
 
 ```
 {

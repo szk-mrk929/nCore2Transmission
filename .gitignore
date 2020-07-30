@@ -1,4 +1,4 @@
-bin/cookie.txt
+bin/php/cookie.txt
 bin/.config
 torrents/*
 .htpasswd
