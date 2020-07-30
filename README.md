@@ -1,12 +1,15 @@
 # nCore2Transmission
+
+master is v0.8a
+
 future tasks:
-- [ ] response back if download was succesful
-- [ ] ignore button what is already downloaded
-- [ ] hitnrun status
-- [ ] show torrent statuses also on search list
+- [ ] torrent pages on click
+- [ ] response back if download was succesful(everywhere) & show progress on "download started page"
+- [ ] ignore download button what is already downloaded and replace with possibility of delete
+- [ ] delete possibility depend on hitnrun status
 
 
-bin/.config file example: 
+bin/.config file example(this is only you need to this project): 
 
 ```
 {
@@ -20,7 +23,7 @@ bin/.config file example:
 		"user": "admin",
 		"pw": "wordpass",
 		"download_dir": "/mnt/usb/download",
-		"pauseOnAdd": true
+		"pauseOnAdd": true  // add torrent as paused or download
 	}
 }
 ```
