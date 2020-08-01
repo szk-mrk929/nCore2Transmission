@@ -39,6 +39,7 @@ function nCore_login($user, $pw){
 	return post_data("https://ncore.cc/login.php","set_lang=hu&submitted=1&nev={$user}&pass={$pw}");
 }
 function nCore_getList($user, $pw, $search, $html){
+	$search = rawurlencode($search);
 	// $html = get_data("https://ncore.cc/torrents.php?miszerint=seeders&hogyan=DESC&tipus=kivalasztottak_kozott&kivalasztott_tipus=xvid_hun,xvidser_hun&miben=name&mire=$search");
 	$html = post_data("https://ncore.cc/login.php?honnan=/torrents.php?miszerint=seeders&hogyan=DESC&tipus=kivalasztottak_kozott&kivalasztott_tipus=xvid_hun,xvidser_hun&miben=name&mire={$search}","set_lang=hu&submitted=1&nev={$user}&pass={$pw}");
 	$doc = new DOMDocument();
@@ -59,7 +60,6 @@ function nCore_getList($user, $pw, $search, $html){
 // $data = json_decode(file_get_contents("php://input"));
 $data = file_get_contents("php://input");
 if($data){
-	$data = htmlspecialchars($data);
 	// print_r( $data );
 	
 	//get config file
