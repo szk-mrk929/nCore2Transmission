@@ -16,21 +16,35 @@ function nCore_HitNRun($e){ //hnr_torrents
 }
 function nCore_torrents($dat){
 	foreach($dat as $item){
-		$href = $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][0]["href"];
-		$img = $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][1]["childs"][0]["childs"][0]["onmouseover"];
+		
+		if($item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][0]["title"]){
+			$name = $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][0]["title"];
+			$href = $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][0]["href"];
+			$imdb = $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][1]["childs"][1]["childs"][1]["text"];
+
+			$img = $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][1]["childs"][0]["childs"][0]["onmouseover"];
+		}else{
+			$name = $item["childs"][1]["childs"][0]["childs"][0]["childs"][1]["childs"][0]["title"];
+			$href = $item["childs"][1]["childs"][0]["childs"][0]["childs"][1]["childs"][0]["href"];
+			$imdb = $item["childs"][1]["childs"][0]["childs"][0]["childs"][1]["childs"][1]["childs"][0]["childs"][0]["text"];
+
+			$img = $item["childs"][1]["childs"][0]["childs"][0]["childs"][1]["childs"][1]["childs"][0]["childs"][0]["onmouseover"];
+		}
 		$img_pos_start = strpos($img, "mutat('")+strlen("mutat('");
 		$img_pos_end = strpos($img, "'", $img_pos_start);
+		$img = substr($img, $img_pos_start, $img_pos_end-$img_pos_start);
 
 		$res[] = array(
-			'name' => $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][0]["title"],
+			'name' => $name,
 			'category' => $item["childs"][0]["childs"][0]["childs"][0]["alt"],
 			'size' => $item["childs"][1]["childs"][4]["text"],
 			'seeders' => $item["childs"][1]["childs"][8]["childs"][0]["text"],
 			'leechers' => $item["childs"][1]["childs"][10]["childs"][0]["text"],
 			'href' => $href,
 			'id' => substr($href, strpos($href, 'id=')+3),
-			'img' => substr($img, $img_pos_start, $img_pos_end-$img_pos_start),
-			'imdb' => $item["childs"][1]["childs"][0]["childs"][1]["childs"][1]["childs"][1]["childs"][1]["childs"][1]["text"]
+			'img' => $img,
+			'imdb' => $imdb,
+			'json' => $item
 		);
 	}
 	return $res;
